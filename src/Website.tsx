@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, Text, Flex, ChakraProvider, Image, Button, Modal, ModalOverlay, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Spacer, Icon } from '@chakra-ui/react';
 import TypeWriter from 'typewriter-effect';
+import img from '/public/foto.jpg';
+import img1 from '/public/climbing_cropped.jpg';
 
 const Logo = () => {
     const [showLogo, setShowLogo] = useState(false);
@@ -28,7 +30,7 @@ const Logo = () => {
             overflow="hidden" // Add this line to clip the image within the rounded box
         >
             <Image
-                src="/public/foto.jpg"
+                src={img}
                 alt="Logo"
                 objectFit="cover" // Ensures the image covers the entire box without stretching
             />
@@ -272,7 +274,7 @@ const ControlButtons = () => {
                             </Box>
                             <Spacer />
                             <Box w="30%">
-                                <Image src="/public/climbing_cropped.jpg" alt="Image" maxH="80" />
+                                <Image src={img1} alt="Image" maxH="80" />
                             </Box>
                         </Flex>
                     </ModalBody>
@@ -289,7 +291,7 @@ const ControlButtons = () => {
 
 
 
-const MySPA = () => {
+const Website = () => {
     return (
         <ChakraProvider>
             <Flex
@@ -305,4 +307,4 @@ const MySPA = () => {
     );
 };
 
-export default MySPA;
+export default Website;
