@@ -13,6 +13,8 @@ import ukr from '/public/ukr.png';
 import AboutMe from './components/modals/aboutme/AboutMe';
 import Impressum from './components/modals/impressum';
 
+import { useTranslation, withTranslation, Trans } from 'react-i18next';
+
 const Logo = () => {
     const [showLogo, setShowLogo] = useState(false);
 
@@ -67,30 +69,28 @@ const TypeWriterBox = () => {
                 <TypeWriter
                     onInit={(typewriter) => {
                         typewriter.pauseFor(2000)
-                            .typeString('Hallo ')
-                            .pasteString('🇩🇪', null)
+                            .typeString('Hallo')
+                            // .pasteString('🇩🇪', null)
                             .pauseFor(1100)
                             .deleteAll()
-                            .typeString('Hello ')
-                            .pasteString('🇬🇧', null)
+                            .typeString('Hello')
+                            // .pasteString('🇬🇧', null)
                             .pauseFor(1100)
                             .deleteAll()
-                            .typeString('Cześć ')
-                            .pasteString('🇵🇱', null)
+                            .typeString('Cześć')
+                            // .pasteString('🇵🇱', null)
                             .pauseFor(1100)
                             .deleteAll()
-                            .typeString('Salam ')
-                            .pasteString('🇦🇿', null)
+                            .typeString('Salam')
+                            // .pasteString('🇦🇿', null)
                             .pauseFor(1100)
                             .deleteAll()
-                            .typeString('Привіт ')
-                            .pasteString('🇺🇦', null)
-                            .typeString('<br/> Привет ')
-                            .pasteString('🇷🇺', null)
+                            .typeString('Привет')
+                            // .pasteString('🇷🇺', null)
                             .pauseFor(1100)
                             .deleteAll()
-                            .typeString('السلام عليكم ')
-                            .pasteString('🇵🇸', null)
+                            .typeString('السلام عليكم')
+                            // .pasteString('🇵🇸', null)
                             .pauseFor(1100)
                             .deleteAll()
                             .pauseFor(400)
@@ -108,6 +108,9 @@ const TypeWriterBox = () => {
 };
 
 const ControlButtons = () => {
+
+    const { t, i18n } = useTranslation();
+
 
     const [isOpen, setIsOpen] = useState(false);
     const [isImpressumOpen, setIsImpressumOpen] = useState(false);
@@ -136,6 +139,10 @@ const ControlButtons = () => {
         transform: 'scaleX(0)', // Start with a scale of 0 (hidden)
         transition: 'transform 0.3s ease', // Add a transition effect
     };
+
+    const handleLanguageChange = (language) => {
+        i18n.changeLanguage(language);
+    }
 
     const handleMouseOver = (e) => {
         e.currentTarget.querySelector('.green-line').style.visibility = 'visible';
@@ -198,7 +205,7 @@ const ControlButtons = () => {
                     mx="5" // Add space between buttons
                 >
                     <span style={buttonTextStyle}>
-                        Über mich
+                        {t("about_me")}
                         <span className="green-line" style={greenLine}></span>
                     </span>
                 </Button>
@@ -212,7 +219,7 @@ const ControlButtons = () => {
                     mx="5" // Add space between buttons
                 >
                     <span style={buttonTextStyle}>
-                        Projekte
+                        {t('projects')}
                         <span className="green-line" style={greenLine}></span>
                     </span>
                 </Button>
@@ -238,10 +245,10 @@ const ControlButtons = () => {
                     <ModalOverlay />
                     <Impressum></Impressum>
                 </Modal>
-                <Modal isOpen={isProjectOpen} onClose={handleClose} size="6xl" isCentered={true}>
+                {/* <Modal isOpen={isProjectOpen} onClose={handleClose} size="6xl" isCentered={true}>
                     <ModalOverlay />
                     <AboutMe></AboutMe>
-                </Modal>
+                </Modal> */}
             </Flex>
             <Flex
                 justify="center"
@@ -252,48 +259,35 @@ const ControlButtons = () => {
                 <IconButton size='sm' backgroundImage={de} backgroundSize='cover' isRound={true} _hover={{
                     backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)'
-                }}
+                }} onClick={() => {handleLanguageChange('de')}}
                 ></IconButton>
                 <IconButton size='sm' backgroundImage={uk} backgroundSize='cover' backgroundPosition='center' isRound={true} _hover={{
                     backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)'
-                }} >
+                }} onClick={() => {handleLanguageChange('en')}} >
 
                 </IconButton>
                 <IconButton size='sm' backgroundImage={pl} backgroundSize='cover' isRound={true} _hover={{
                     backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)'
-                }} >
+                }} onClick={() => {handleLanguageChange('pl')}} >
 
-                </IconButton>
-                <IconButton size='sm' backgroundImage={uae} backgroundSize='cover' isRound={true} _hover={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)'
-                }}>
                 </IconButton>
                 <IconButton size='sm' backgroundImage={az} backgroundSize='cover' backgroundPosition='center' isRound={true} _hover={{
                     backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)'
-                }} >
-                </IconButton>
-                <IconButton size='sm' backgroundImage={ukr} backgroundSize='cover' isRound={true} _hover={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)'
-                }}>
+                }} onClick={() => {handleLanguageChange('az')}} >
                 </IconButton>
                 <IconButton size='sm' backgroundImage={ru} backgroundSize='cover' isRound={true} _hover={{
                     backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)'
-                }}>
+                }} onClick={() => {handleLanguageChange('ru')}}>
                 </IconButton>
-
-
-
-
-
-
-
-
+                <IconButton size='sm' backgroundImage={uae} backgroundSize='cover' isRound={true} _hover={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)'
+                }} onClick={() => {handleLanguageChange('ar')}}>
+                </IconButton>
             </Flex >
         </>
     );
@@ -302,6 +296,8 @@ const ControlButtons = () => {
 
 
 const Website = () => {
+
+
     return (
         <ChakraProvider>
             <Flex

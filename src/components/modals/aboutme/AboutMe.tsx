@@ -1,8 +1,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, Text, Flex, ChakraProvider, Image, Button, Modal, ModalOverlay, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Spacer, Icon } from '@chakra-ui/react';
-import TypeWriter from 'typewriter-effect'
-import img1 from '/public/climbing_cropped.jpg'
+import TypeWriter from 'typewriter-effect';
+import img1 from '/public/climbing_cropped.jpg';
+import { useTranslation, withTranslation, Trans } from 'react-i18next';
+
 
 const DirectusIcon = () => {
     return (
@@ -16,20 +18,29 @@ const DirectusIcon = () => {
 }
 
 const AboutMe = () => {
+
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        // // i18n.changeLanguage("az");
+        // i18n.changeLanguage("en");
+    }, [])
+
+
     return (
         <ModalContent bg="white" color="black">
             <ModalHeader fontSize="2xl">
                 <TypeWriter
                     onInit={(typewriter) => {
-                        typewriter.typeString('Über mich.')
+                        typewriter.typeString('about_me')
                             .pauseFor(1000)
-                            .deleteChars(5)
+                            .deleteChars(3)
                             // .deleteAll()
                             .pauseFor(500)
                             .pasteString(' 👨‍👩‍👧‍👦', null)
                             .pauseFor(1000)
                             // .deleteAll()
-                            .deleteChars(2)
+                            .deleteChars(1)
                             .pauseFor(500)
                             .pasteString(' ⛰️', null)
                             .pauseFor(1000)
@@ -47,16 +58,16 @@ const AboutMe = () => {
                 <Flex p="5px" alignItems="center">
                     <Box w="60%">
                         <Text fontSize="xl" textAlign="justify">
-                            Hallo! Ich heiße Arthur Kajetan Wielomski.
-                            Die Zukunt der Mobilität liegt mir besonders am Herzen, darum arbeite ich bei <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href='https://iav.de'>IAV</a>.
+                            {t("about_me_name")}
+                            <br></br>
+                            {t("about_me_second")} <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href='https://iav.de'>IAV</a>.
                             <br></br>
                             <br></br>
-                            Ein besonderes Augenmerk habe ich für die <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href="https://www.iav.com/news/erzgebirge-e-shuttle-nur-einen-swipe-entfernt/">Mobilität im ländlichen Raum. </a>
-                            Ich bin überzeugt, dass der ländliche Raum nur über die Entwicklung
-                            einer offenen Mobilitätsplattform weiterhin attraktiv bleiben kann.
+                            {t("about_me_third")} <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href="https://www.iav.com/news/erzgebirge-e-shuttle-nur-einen-swipe-entfernt/">{t("about_me_fourth")} </a>
+                            {t("about_me_fifth")}
                             <br></br>
                             <br></br>
-                            Außerdem bin ich großer Fan von <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href="https://directus.io">Directus</a> <DirectusIcon /> als NoCode-Plattform.
+                            {t("about_me_sixth")} <a style={{ 'color': '#5daedb' }} target="_blank" rel="noreferrer" href="https://directus.io">Directus</a> <DirectusIcon /> {t("about_me_seventh")}
                         </Text>
                     </Box>
                     <Spacer />
